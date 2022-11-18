@@ -145,7 +145,7 @@ namespace IocLists
         /// Get all unique indicators in a list.
         /// </summary>
         /// <param name="username">The target list's author username.</param>
-        /// <param name="listName">The target list name./param>
+        /// <param name="listName">The target list name.</param>
         /// <returns></returns>
         /// <exception cref="IocListsException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
