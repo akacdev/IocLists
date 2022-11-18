@@ -1,7 +1,7 @@
 ﻿﻿# IocLists 📝
 
 <div align="center">
-  <img width="256" height="256" src="https://raw.githubusercontent.com/actually-akac/IocLists/master/IocLists/icon.png">
+  <img width="256" height="256" src="https://raw.githubusercontent.com/actually-akac/IOCLists/master/IocLists/icon.png">
 </div>
 
 <div align="center">

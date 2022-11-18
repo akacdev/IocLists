@@ -1,6 +1,6 @@
 ﻿﻿# IocLists 📝
 
-![](https://raw.githubusercontent.com/actually-akac/IocLists/master/IocLists/icon.png)
+![](https://raw.githubusercontent.com/actually-akac/IOCLists/master/IocLists/icon.png)
 
 # 🛑 An async and lightweight C# library for interacting with the IOCLists.com API.
 
