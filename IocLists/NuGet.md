@@ -1,4 +1,4 @@
-﻿﻿# IocLists 📝
+﻿# IocLists 📝
 
 ![](https://raw.githubusercontent.com/actually-akac/IOCLists/master/IocLists/icon.png)
 
