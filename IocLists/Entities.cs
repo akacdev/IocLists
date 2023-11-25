@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace IocLists
 {
+    /// <summary>
+    /// Represents a custom user-friendly error from IocLists.
+    /// </summary>
     public class IocListsError
     {
         [JsonPropertyName("result")]

@@ -9,11 +9,26 @@ namespace IocLists
     /// </summary>
     public class IocListsException : Exception
     {
+        /// <summary>
+        /// The HTTP request method that triggered this exception.
+        /// </summary>
         public HttpMethod Method { get; set; }
+        /// <summary>
+        /// The HTTP path that triggered this exception.
+        /// </summary>
         public string Path { get; set; }
+        /// <summary>
+        /// The HTTP status code that triggered this exception.
+        /// </summary>
         public HttpStatusCode? StatusCode { get; set; }
 
         public IocListsException(string message) : base(message) { }
+        public IocListsException(string message, HttpResponseMessage res) : base(message)
+        {
+            Method = res.RequestMessage.Method;
+            Path = res.RequestMessage.RequestUri.AbsolutePath;
+            StatusCode = res.StatusCode;
+        }
         public IocListsException(string message, HttpMethod method, string path, HttpStatusCode status) : base(message)
         {
             Method = method;

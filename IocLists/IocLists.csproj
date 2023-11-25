@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <!--Basic Information-->
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
     <PackageId>IocLists</PackageId>
     <Product>IocLists</Product>
     <Authors>akac</Authors>

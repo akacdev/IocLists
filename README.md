@@ -5,13 +5,14 @@
 </div>
 
 <div align="center">
-  🛑 An async and lightweight C# library for interacting with the IOCLists.com API.
+  An async and lightweight C# library for interacting with the IOCLists.com API.
 </div>
 
 ## Usage
-Provides an easy interface for interacting with the [IOC Lists](https://ioclists.com) API.
+This library provides an easy interface for interacting with the [IOC Lists](https://ioclists.com) API.
+You can automate your IOC (Indicator of Compromise) management by automatically adding or removing indicators from lists.
 
-To get started, add the library into your solution with either the `NuGet Package Manager` or the `dotnet` CLI.
+To get started, import the library into your solution with either the `NuGet Package Manager` or the `dotnet` CLI.
 ```rust
 dotnet add package IocLists
 ```
@@ -25,15 +26,19 @@ An API key is required to interact with the API. Create your own key at: https:/
 
 Need more examples? Under the `Example` directory you can find a working demo project that implements this library.
 
-## Features
-- Built for **.NET 6** and **.NET 7**
+## Properties
+- Built for **.NET 8**, **.NET 7** and **.NET 6**
 - Fully **async**
-- Deep coverage of the API
+- Coverage of the current **API**
 - Extensive **XML documentation**
-- **No external dependencies** (uses integrated HTTP and JSON)
-- **Custom exceptions** (`IocListsException`) for advanced catching
+- **No external dependencies** (makes use of built-in `HttpClient` and `JsonSerializer`)
+- **Custom exceptions** (`IocListsException`) for easy debugging
 - Example project to demonstrate all capabilities of the library
-- Create and download IOC lists, add entries and search for existing indicators submitted by the community
+
+## Features
+- Create and download IOC lists
+- Add and delete entries
+- Search for existing indicators submitted by the community
 
 ## Code Samples
 
@@ -66,15 +71,6 @@ string[] unique = await client.GetUnique("mirrors", "phishtank");
 ```csharp
 Entry[] matches = await client.Search("62.216.168.7");
 ```
-
-## Available Methods
-
-- Task **Add**(string username, string listName, string entry)
-- Task **CreateList**(CreateListParameters parameters)
-- Task **CreateList**(string username, string listName, string description, int hoursToExpire = 8766, FeedType feedType = FeedType.Security, bool isPrivate = false, bool isActive = true, bool isMirror = false, string mirrorOriginalUrl = null)
-- Task\<Entry[]> **GetRecent**(string username, string listName)
-- Task\<Entry[]> **Search**(string query)
-- Task\<string[]> **GetUnique**(string username, string listName)
 
 ## Resources
 - Website: https://ioclists.com

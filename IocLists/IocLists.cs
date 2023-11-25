@@ -20,21 +20,21 @@ namespace IocLists
         private readonly HttpClient Client = new(HttpHandler)
         {
             BaseAddress = Constants.BaseUri,
-            DefaultRequestVersion = new(2, 0),
+            DefaultRequestVersion = Constants.HttpVersion
         };
 
         /// <summary>
         /// Create a new instance of the API client.
         /// </summary>
-        /// <param name="key">Your IOC Lists API key. Create one at <a href="https://ioclists.com/r/settings"></a>.</param>
+        /// <param name="key">Your IOC Lists API key. You can create one at <a href="https://ioclists.com/r/settings"></a>.</param>
         /// <exception cref="ArgumentNullException"></exception>
         public IocListsClient(string key)
         {
             if (string.IsNullOrEmpty(key)) throw new ArgumentNullException(nameof(key), "Key is null or empty.");
 
-            Client.DefaultRequestHeaders.AcceptEncoding.ParseAdd(Constants.AcceptedEncoding);
+            Client.DefaultRequestHeaders.AcceptEncoding.ParseAdd("gzip, deflate, br");
             Client.DefaultRequestHeaders.UserAgent.ParseAdd(Constants.UserAgent);
-            Client.DefaultRequestHeaders.Accept.ParseAdd(Constants.JsonContentType);
+            Client.DefaultRequestHeaders.Accept.ParseAdd("application/json");
             Client.DefaultRequestHeaders.Add("X-API-Key", key);
         }
 
@@ -98,8 +98,8 @@ namespace IocLists
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<Entry[]> GetRecent(string username, string listName)
         {
-            if (username is null) throw new ArgumentNullException(nameof(username), "Username is null or empty.");
-            if (listName is null) throw new ArgumentNullException(nameof(listName), "List name is null or empty.");
+            if (string.IsNullOrEmpty(username)) throw new ArgumentNullException(nameof(username), "Username is null or empty.");
+            if (string.IsNullOrEmpty(listName)) throw new ArgumentNullException(nameof(listName), "List name is null or empty.");
 
             HttpResponseMessage res = await Client.Request(HttpMethod.Get, $"lists/{username}/{listName.UrlEncode()}/");
 
@@ -131,9 +131,9 @@ namespace IocLists
         /// <exception cref="ArgumentNullException"></exception>
         public async Task Add(string username, string listName, string entry)
         {
-            if (username is null) throw new ArgumentNullException(nameof(username), "Username is null or empty.");
+            if (string.IsNullOrEmpty(username)) throw new ArgumentNullException(nameof(username), "Username is null or empty.");
             if (listName is null) throw new ArgumentNullException(nameof(listName), "List name is null or empty.");
-            if (entry is null) throw new ArgumentNullException(nameof(entry), "Entry is null or empty.");
+            if (string.IsNullOrEmpty(entry)) throw new ArgumentNullException(nameof(entry), "Entry is null or empty.");
 
             await Client.Request(HttpMethod.Post, $"lists/{username}/{listName.UrlEncode()}/", new EntryAddParameters()
             {
@@ -151,10 +151,10 @@ namespace IocLists
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<string[]> GetUnique(string username, string listName)
         {
-            if (username is null) throw new ArgumentNullException(nameof(username), "Username is null or empty.");
+            if (string.IsNullOrEmpty(username)) throw new ArgumentNullException(nameof(username), "Username is null or empty.");
             if (listName is null) throw new ArgumentNullException(nameof(listName), "List name is null or empty.");
 
-            HttpResponseMessage res = await Client.Request(HttpMethod.Get, $"lists/{username}/{listName.UrlEncode()}/indicators/unique", Constants.PlainTextContentType);
+            HttpResponseMessage res = await Client.Request(HttpMethod.Get, $"lists/{username}/{listName.UrlEncode()}/indicators/unique");
 
             List<string> output = new();
 
@@ -185,7 +185,7 @@ namespace IocLists
         /// <exception cref="ArgumentNullException"></exception>
         public async Task<Entry[]> Search(string query)
         {
-            if (query is null) throw new ArgumentNullException(nameof(query), "Query is null or empty.");
+            if (string.IsNullOrEmpty(query)) throw new ArgumentNullException(nameof(query), "Query is null or empty.");
 
             HttpResponseMessage res = await Client.Request(HttpMethod.Get, $"indicator/entries?indicator={query.UrlEncode()}");
 
